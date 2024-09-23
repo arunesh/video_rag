@@ -250,16 +250,16 @@ def run_experiment_with_custom_query_logic(experiment_name, custom_query_logic_f
 
 
 # GPT  for query and Claude as judge:
-run_experiment_with_custom_query_logic("VideRAG_Experiment_101_oai_query_claude_judge", query_rag_oai_with_lf,
-        retriever, claude_llm_evaluation, "video_rag_claude_query_oai_judge_1.csv")
+#run_experiment_with_custom_query_logic("VideRAG_Experiment_101_oai_query_claude_judge", query_rag_oai_with_lf,
+#        retriever, claude_llm_evaluation, "video_rag_claude_query_oai_judge_1.csv")
 
 # Claude for query and GPR3.5 as judge:
-run_experiment_with_custom_query_logic("VideoRAG_Experiment_10_claude_query_oai_judge", query_rag_claude_with_lf,
-         retriever, oai_llm_evaluation, "video_rag_oai_query_claude_judge_1.csv")
+#run_experiment_with_custom_query_logic("VideoRAG_Experiment_101_claude_query_oai_judge", query_rag_claude_with_lf,
+#         retriever, oai_llm_evaluation, "video_rag_oai_query_claude_judge_1.csv")
 
 # Claude as query and judge:
-run_experiment_with_custom_query_logic("VideoRAG_Experiment_11_claude_query_and_judge", query_rag_claude_with_lf,
-        retriever, claude_llm_evaluation, "video_rag_claude_query_and_judge_1.csv")
+#run_experiment_with_custom_query_logic("VideoRAG_Experiment_11_claude_query_and_judge", query_rag_claude_with_lf,
+#        retriever, claude_llm_evaluation, "video_rag_claude_query_and_judge_1.csv")
 
 # GPT  as query and judge:
 run_experiment_with_custom_query_logic("VideoRAG_Experiment_12_oai_query_and_judge", query_rag_oai_with_lf,
