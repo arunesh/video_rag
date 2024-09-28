@@ -16,6 +16,7 @@ from langfuse.llama_index import LlamaIndexCallbackHandler
 langfuse_callback_handler = LlamaIndexCallbackHandler()
 Settings.callback_manager = CallbackManager([langfuse_callback_handler])
 
+
 # OAI client
 from openai import OpenAI
 import json
