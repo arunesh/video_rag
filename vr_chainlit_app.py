@@ -29,6 +29,13 @@ If you are ready to process a video, generate this function call:
     "video_url": "Url of the video if the user provides, one.",
     "rationale": "Explain why would you like to call this function"
 }
+
+If the user asks questions regarding the video, generate this function call:
+{
+    "function_name": "query_video",
+    "query": "User's query as a sentence.",
+    "rationale": "Explain why would you like to call this function"
+}
 """
 
 client = AsyncOpenAI()
@@ -98,8 +105,23 @@ def add_assistant_message(message_history, msg):
     message_history.append({"role": "assistant", "content": msg})
 
 def process_video(url):
-    video_rag = VideoRag()
+    video_rag = VideoRag("./events_kb/event1/")
+    video_rag.create_index()
+    video_rag.init_multimodal_oai()
+    cl.user_session.set("video_rag", video_rag)
     print("Processing complete.")
+
+async def process_query(query_str):
+    video_rag = cl.user_session.get("video_rag", None)
+    if video_rag:
+        text, images = video_rag.retrieve(query_str)
+        print("Query result:", text)
+        print("Images result:", images)
+        for img in images:
+            print(img.metadata['file_path'])
+        image_list = [cl.Image(path=f"{img.metadata['file_path']}", name="images", display="inline") for img in images]
+        response = video_rag.query_with_oai(query_str, text, images)
+        await cl.Message(content=response, elements=image_list).send()
 
 @cl.on_chat_start
 async def start_chat():
@@ -138,6 +160,11 @@ async def on_message(message: cl.Message):
             process_video(youtube_url)
             add_system_message(message_history, f"Video processing complete. User may ask questions regarding the video.")
             last_llm_response = await generate_llmresponse(client, message_history, gen_kwargs)
+        elif function_call["function_name"] == "query_video":
+            if "query" in function_call:
+                query_str = function_call["query"]
+                await process_query(query_str)
+
 
 
     response_message = cl.Message(content=last_llm_response)
