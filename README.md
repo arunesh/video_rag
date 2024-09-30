@@ -3,6 +3,20 @@
 
 Python project to explore building a RAG over a video.
 
+## Week 3 update:
+
+chainlit app that allows the VideoRag to download a video, create a MultiModalVectorDb and
+answer questions.
+
+chainlit run vr_chainlit_app.py -w
+
+Conversation flow:
+user: "i have a video url"
+user: <provides a url>
+user: answers yes for video processing
+user: asks questions regarding the video.
+
+
 
 ### Datasets
 
