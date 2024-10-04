@@ -104,6 +104,6 @@ if __name__ == "__main__":
     json_index_outputpath = "./temp/index/video_index.json"
     frame_outputpath = "./temp/frames/"
     threshold_ratio = 0.2
-    debug_outfile = "./temp/debug_video.avi"
+    debug_outfile = "./temp/debug_video.mp4"
     frame_writer = OpenCVFrameWriter(video_path, json_index_outputpath, frame_outputpath, threshold_ratio)
     frame_writer.process_video(debug_outfile)
