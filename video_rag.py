@@ -83,3 +83,4 @@ class VideoRag:
 
         print(text_response.text)
         return text_response.text
+
